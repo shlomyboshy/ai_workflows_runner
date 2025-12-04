@@ -1,0 +1,10 @@
+{
+  "template_name": "llm_analyze_call",
+  "type": "llm",
+  "description": "Analyzes call transcript to extract key information: success, type, home visit suggestion, frustration",
+  "input_fields": ["transcript", "patient_name"],
+  "output_fields": ["call_succeeded", "call_type", "home_visit_suggested", "patient_frustrated"],
+  "prompt_name": "analyze_patient_call",
+  "llm_model_name": "gpt-4",
+  "prompt_version": "v2.0"
+}

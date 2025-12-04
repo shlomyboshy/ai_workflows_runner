@@ -1,0 +1,10 @@
+{
+  "template_name": "llm_create_call_summary",
+  "type": "llm",
+  "description": "Creates comprehensive summary for successful patient calls",
+  "input_fields": ["transcript", "patient_name", "call_type", "home_visit_suggested", "patient_frustrated"],
+  "output_fields": ["call_summary"],
+  "prompt_name": "create_patient_call_summary",
+  "llm_model_name": "gpt-3.5-turbo",
+  "prompt_version": "v1.5"
+}

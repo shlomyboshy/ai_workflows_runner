@@ -1,0 +1,9 @@
+{
+  "template_name": "db_fetch_patient_data",
+  "type": "db_read",
+  "description": "Fetches patient data from database by patient ID",
+  "input_fields": ["patient_id"],
+  "output_fields": ["patient_name", "patient_email", "patient_history"],
+  "db_name": "patients_db",
+  "query": "SELECT name, email, medical_history FROM patients WHERE id = {patient_id}"
+}

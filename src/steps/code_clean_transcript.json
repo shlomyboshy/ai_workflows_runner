@@ -1,0 +1,8 @@
+{
+  "template_name": "code_clean_transcript",
+  "type": "code_function",
+  "description": "Cleans and normalizes call transcript text",
+  "input_fields": ["raw_transcript"],
+  "output_fields": ["cleaned_transcript"],
+  "function_name": "clean_call_transcript"
+}

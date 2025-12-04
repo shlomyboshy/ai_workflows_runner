@@ -1,0 +1,10 @@
+{
+  "template_name": "llm_create_escalation_summary",
+  "type": "llm",
+  "description": "Creates escalation summary for unsuccessful patient calls requiring follow-up",
+  "input_fields": ["transcript", "patient_name", "call_type", "patient_frustrated"],
+  "output_fields": ["escalation_summary", "urgency_level"],
+  "prompt_name": "create_escalation_summary",
+  "llm_model_name": "gpt-4",
+  "prompt_version": "v1.0"
+}
