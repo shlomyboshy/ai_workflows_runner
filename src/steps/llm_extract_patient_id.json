@@ -1,0 +1,10 @@
+{
+  "template_name": "llm_extract_patient_id",
+  "type": "llm",
+  "description": "Extracts patient identification from call transcript",
+  "input_fields": ["transcript"],
+  "output_fields": ["patient_id", "extraction_confidence"],
+  "prompt_name": "extract_patient_identification",
+  "llm_model_name": "gpt-4",
+  "prompt_version": "v1.0"
+}

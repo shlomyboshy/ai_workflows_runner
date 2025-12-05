@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>patient_call_analysis_flow - Workflow Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .mermaid {
+            background-color: white;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>patient_call_analysis_flow Workflow</h1>
+        <div class="mermaid">
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	clean_transcript(clean_transcript)
+	extract_patient_id(extract_patient_id)
+	fetch_patient_data(fetch_patient_data)
+	analyze_call(analyze_call)
+	create_summary(create_summary)
+	create_escalation(create_escalation)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> clean_transcript;
+	analyze_call -.-> create_escalation;
+	analyze_call -.-> create_summary;
+	clean_transcript --> extract_patient_id;
+	create_summary -.-> __end__;
+	extract_patient_id --> fetch_patient_data;
+	fetch_patient_data --> analyze_call;
+	create_escalation --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
+
+        </div>
+    </div>
+</body>
+</html>

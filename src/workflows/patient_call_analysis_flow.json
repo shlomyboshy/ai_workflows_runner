@@ -1,0 +1,90 @@
+{
+  "workflow_name": "patient_call_analysis_flow",
+  "version": "1.0.0",
+  "steps": [
+    {
+      "step_name": "clean_transcript",
+      "step_template_name": "code_clean_transcript",
+      "input_fields_mapping": {
+        "raw_transcript": "call_transcript"
+      },
+      "output_fields_mapping": {
+        "cleaned_transcript": "cleaned_transcript"
+      }
+    },
+    {
+      "step_name": "extract_patient_id",
+      "step_template_name": "llm_extract_patient_id",
+      "input_fields_mapping": {
+        "transcript": "cleaned_transcript"
+      },
+      "output_fields_mapping": {
+        "patient_id": "patient_id",
+        "extraction_confidence": "extraction_confidence"
+      }
+    },
+    {
+      "step_name": "fetch_patient_data",
+      "step_template_name": "db_fetch_patient_data",
+      "input_fields_mapping": {
+        "patient_id": "patient_id"
+      },
+      "output_fields_mapping": {
+        "patient_name": "patient_name",
+        "patient_email": "patient_email",
+        "patient_history": "patient_history"
+      }
+    },
+    {
+      "step_name": "analyze_call",
+      "step_template_name": "llm_analyze_call",
+      "input_fields_mapping": {
+        "transcript": "cleaned_transcript",
+        "patient_name": "patient_name"
+      },
+      "output_fields_mapping": {
+        "call_succeeded": "call_succeeded",
+        "call_type": "call_type",
+        "home_visit_suggested": "home_visit_suggested",
+        "patient_frustrated": "patient_frustrated"
+      },
+      "output_field_for_next_step_mapping": "call_succeeded",
+      "next_step_mapping": {
+        "yes": "create_summary",
+        "no": "create_escalation"
+      }
+    },
+    {
+      "step_name": "create_summary",
+      "step_template_name": "llm_create_call_summary",
+      "input_fields_mapping": {
+        "transcript": "cleaned_transcript",
+        "patient_name": "patient_name",
+        "call_type": "call_type",
+        "home_visit_suggested": "home_visit_suggested",
+        "patient_frustrated": "patient_frustrated"
+      },
+      "output_fields_mapping": {
+        "call_summary": "final_call_summary"
+      },
+      "output_field_for_next_step_mapping": null,
+      "next_step_mapping": {
+        "__any__": "__end__"
+      }
+    },
+    {
+      "step_name": "create_escalation",
+      "step_template_name": "llm_create_escalation_summary",
+      "input_fields_mapping": {
+        "transcript": "cleaned_transcript",
+        "patient_name": "patient_name",
+        "call_type": "call_type",
+        "patient_frustrated": "patient_frustrated"
+      },
+      "output_fields_mapping": {
+        "escalation_summary": "final_call_summary",
+        "urgency_level": "urgency_level"
+      }
+    }
+  ]
+}
